@@ -1,6 +1,5 @@
 package com.astroenvision.astropower.database
 
-import android.content.ComponentName
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
@@ -8,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.astroenvision.astropower.dao.UserDao
 import com.astroenvision.astropower.entities.UserEntity
 
-@Database(entities = [UserEntity::class], version = 1)
+@Database(entities = [UserEntity::class], version = 1, exportSchema = false)
 abstract class UserDatabase : RoomDatabase() {
 
     abstract fun userDao(): UserDao
@@ -23,7 +22,7 @@ abstract class UserDatabase : RoomDatabase() {
                     INSTANCE = Room.databaseBuilder(
                         context.applicationContext,
                         UserDatabase::class.java,
-                        "userDB"
+                        "userDB.db"
                     ).build()
                 }
             }

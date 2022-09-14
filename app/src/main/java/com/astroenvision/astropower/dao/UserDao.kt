@@ -15,10 +15,10 @@ interface UserDao {
     @Delete
     suspend fun deleteUser(userEntity: UserEntity)
 
-    @Query("SELECT * FROM USER_MST")
+    @Query("SELECT * FROM user_mst")
     suspend fun getUser(): UserEntity
 
-    @Query("SELECT * FROM USER_MST")
+    @Query("SELECT * FROM user_mst")
     fun getUserList(): LiveData<List<UserEntity>>
 
 }
