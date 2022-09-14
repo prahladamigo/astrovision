@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AstroPower">
         <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -27,8 +30,7 @@
             android:name=".view.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.AstroPower.NoActionBar">
-        </activity>
+            android:theme="@style/Theme.AstroPower.NoActionBar"></activity>
     </application>
 
 </manifest>
