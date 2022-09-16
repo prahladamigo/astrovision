@@ -28,5 +28,7 @@
     <string name="send_to">send to</string>
     <string name="enter_4_digit_otp">ENTER 4 DIGIT OTP</string>
     <string name="confirm_otp">Confirm OTP</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
