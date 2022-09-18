@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+
+    <include
+        android:id="@+id/white_toolbar"
+        layout="@layout/layout_toolbar_white_bg" />
+
+    <ScrollView
+        android:id="@+id/family_member_rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/lay_bottom_btn"
+        android:layout_below="@+id/white_toolbar"
+        android:scrollbars="none"
+        android:padding="@dimen/padding_20">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/adtop"
+            android:layout_marginBottom="@dimen/margin_15dp"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_20sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/robo_bold"
+            android:text="Confused Over Career Options?"
+            android:layout_marginBottom="@dimen/margin_15dp"/>
+
+
+
+            <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_12sp"
+            android:textColor="@color/light_gray"
+            android:fontFamily="@font/robo_regular"
+            android:text="@string/dummy_content"/>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/ll_no_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/no_data_found"
+            android:textColor="@color/color_green"
+            android:fontFamily="@font/robo_bold"
+            android:textSize="@dimen/text_size_22sp"
+            android:gravity="center"/>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/lay_bottom_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:padding="@dimen/padding_20">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/lay_height_1dp"
+        android:background="@color/color_dedede"
+        android:layout_marginBottom="@dimen/margin_10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_12sp"
+            android:textColor="@color/light_gray"
+            android:fontFamily="@font/robo_regular"
+            android:text="@string/payable_amount"
+            android:layout_marginBottom="@dimen/margin_10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/margin_10dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/discount_amt_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_12sp"
+                    android:textColor="@color/light_gray"
+                    android:fontFamily="@font/robo_regular"
+                    android:text="Rs.1140.00"/>
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/lay_height_1dp"
+                    android:background="@color/light_gray"
+                    android:layout_centerInParent="true"
+                    android:layout_toStartOf="@+id/discount_amt_txt"
+                    android:layout_toEndOf="@id/discount_amt_txt" />
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_12sp"
+                android:textColor="@color/dark_blue"
+                android:fontFamily="@font/robo_bold"
+                android:layout_marginStart="@dimen/margin_5dp"
+                android:text="Rs.399.00"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_10sp"
+                android:textColor="@color/orange"
+                android:fontFamily="@font/robo_bold"
+                android:layout_marginStart="@dimen/margin_5dp"
+                android:text="65% off"/>
+
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/lay_height_1dp"
+            android:background="@color/color_dedede"
+            android:layout_marginBottom="@dimen/margin_10dp"/>
+
+
+        <TextView
+        android:id="@+id/take_subscription_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/solid_yellow_curve_bg"
+        android:drawableRight="@drawable/ic_arrow_right"
+        android:drawableTint="@color/white"
+        android:gravity="center"
+        android:padding="@dimen/margin_16dp"
+        android:text="@string/take_subscription"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_14sp"
+        android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

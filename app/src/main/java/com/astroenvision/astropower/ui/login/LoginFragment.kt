@@ -68,7 +68,7 @@ class LoginFragment : Fragment() {
             when (it) {
                 is NetworkResult.Success -> {
                     //  tokenManager.saveToken(it.data!!.token)
-                    findNavController().navigate(R.id.action_loginFragment_to_createAccountFragment)
+                    findNavController().navigate(R.id.action_OTPFragment_to_createAccountFragment)
                 }
                 is NetworkResult.Error -> {
                     showSnackBar(binding.root, it.message.toString())
