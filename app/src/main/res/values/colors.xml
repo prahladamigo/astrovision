@@ -40,6 +40,7 @@
     <color name="color_shadow_drop">#1EBEC7C2</color>
     <color name="color_C4C8CA">#C4C8CA</color>
     <color name="color_C1CBD1">#C1CBD1</color>
+    <color name="color_E3EDF7">#E3EDF7</color>
     <color name="dark_blue">#0A2C4F</color>
     <color name="cherry_red">#AE2220</color>
     <color name="txt_disabled_color">#75848F</color>
@@ -48,4 +49,5 @@
     <color name="color_797777">#797777</color>
     <color name="light_gray">#797777</color>
     <color name="gray">#797777</color>
+    <color name="color_4C4C4D">#4C4C4D</color>
 </resources>

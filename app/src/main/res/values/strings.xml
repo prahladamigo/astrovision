@@ -21,6 +21,7 @@
     <string name="login_failed">"Login failed"</string>
     <string name="sign_in_register">Sign In/ Register</string>
     <string name="mobile_number">Mobile Number</string>
+    <string name="rashi_fal_leo">कुंभ | Aquarius</string>
     <string name="continue_to_proceed">Continue to Proceed</string>
     <string name="by_continue_you_agree">By Continue, you agree to <b><font color="#FFC107">Terms of Service </font></b> &amp; <b><font color="#FFC107">Privacy Policy</font></b></string>
     <string name="verify_otp">Verify OTP</string>
@@ -35,6 +36,31 @@
     <string name="birth_time">Birth Time</string>
     <string name="birth_place">Birth Place</string>
     <string name="sign_in">Sign In</string>
+    <string name="namaskar_guest">Guest User</string>
+    <string name="my_profile">My Profile</string>
+    <string name="my_family_details">My Family Details</string>
+    <string name="my_subscription">My Subscription</string>
+    <string name="language_preference">Language Preference</string>
+    <string name="refer_earn"><![CDATA[Refer & Earn]]></string>
+    <string name="rate_us">Rate Us</string>
+    <string name="logout">Logout</string>
+    <string name="powered_by">Powered by : Astro Envision</string>
+    <string name="version">Version 1.0.1.1</string>
+    <string name="change_profile_photo">Change Profile Photo</string>
+    <string name="religion">Religion</string>
+    <string name="caste">Caste</string>
+    <string name="edit_details">Edit Details</string>
+    <string name="rashi_description">अनेक अवसर होने के बाद भी आप का ध्यान कहीं और होने से परिस्थिति नकारात्मक नजर आ रही है। कार्य का श्रेय प्राप्त करने की कोशिश करनी होगी। अपनी परिस्थिति को संभालने के लिए मानसिक और शारीरिक रूप से स्वस्थ रहना आपके लिए जरूरी होगा। इस बात का ध्यान रखें।  करियर : विद्यार्थियों का ध्यान भटकता हुआ नजर आ रहा है। पढ़ाई के बारे में जागरूकता रखें।  लव : परिवार के लोगों के द्वारा बोली गई बातों के बाद भी रिलेशनशिप संबंधी निर्णय पर आप टिके रहने की कोशिश करेंगे।</string>
+    <string name="date">रविवार, 18 सितम्बर 2022</string>
+    <string name="view_more">view_more</string>
+    <string name="horoscope">Horoscope</string>
+    <string name="kundali_matching">Kundli Matching</string>
+    <string name="manglik_dosh">Manglik Dosha- Exist ?</string>
+    <string name="kal_sarpa">Kaal Sarpa Dosha</string>
+    <string name="astro_facts">Astro Facts</string>
+    <string name="profile">Profile</string>
+    <string name="my_family">My Family</string>
+    <string name="talk_to_astro">Talk to Astrologer</string>
 
     <string-array name="signature">
         <item>Mr</item>

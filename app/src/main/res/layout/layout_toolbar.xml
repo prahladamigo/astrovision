@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="?attr/actionBarSize"
+    android:background="@color/color_C1CBD1"
+    app:popupTheme="@style/AppTheme.PopupOverlay"
+    app:subtitleTextAppearance="@style/ToolbarSubtitleAppearance"
+    app:titleTextAppearance="@style/ToolbarTitleAppearance"
+    android:padding="@dimen/activity_margin_15dp">
+
+    <ImageView
+        android:id="@+id/iv_toolbar"
+        android:layout_width="@dimen/activity_margin_30dp"
+        android:layout_height="@dimen/activity_margin_25dp"
+        android:layout_centerVertical="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_menu"
+        app:tint="@color/yellow" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/activity_margin_5dp"
+        android:layout_marginRight="@dimen/activity_margin_5dp"
+        android:layout_toEndOf="@+id/iv_toolbar"
+        android:orientation="vertical">
+
+
+
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_notification"
+        android:layout_width="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:visibility="visible"
+        android:layout_marginEnd="@dimen/activity_margin_5dp"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:id="@+id/ic_notification"
+            android:layout_width="@dimen/activity_margin_30dp"
+            android:layout_height="@dimen/activity_margin_30dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_notifications" />
+
+
+        <TextView
+            android:id="@+id/txt_notification_count"
+            android:layout_width="@dimen/activity_margin_15dp"
+            android:layout_height="@dimen/activity_margin_15dp"
+            android:layout_alignTop="@+id/ic_notification"
+            android:layout_alignRight="@+id/ic_notification"
+            android:background="@drawable/oval_red_bg"
+            android:gravity="center"
+            android:maxLength="2"
+            android:text="0"
+            android:visibility="gone"
+            android:textColor="@color/white"
+            android:textSize="@dimen/activity_margin_8dp" />
+    </RelativeLayout>
+
+</RelativeLayout>
