@@ -36,10 +36,6 @@ class LoginFragment : Fragment() {
 
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
 
-        /*  binding.txtContinueProceed.setOnClickListener {
-              findNavController().navigate(R.id.action_loginFragment_to_OTPFragment)
-          }*/
-
         return binding.root
     }
 
@@ -72,7 +68,7 @@ class LoginFragment : Fragment() {
             when (it) {
                 is NetworkResult.Success -> {
                     //  tokenManager.saveToken(it.data!!.token)
-                    findNavController().navigate(R.id.action_loginFragment_to_OTPFragment)
+                    findNavController().navigate(R.id.action_loginFragment_to_createAccountFragment)
                 }
                 is NetworkResult.Error -> {
                     showSnackBar(binding.root, it.message.toString())

@@ -22,7 +22,7 @@ class OTPFragment : Fragment() {
         _binding = FragmentOtpBinding.inflate(inflater, container, false)
 
         binding.txtOTP.setOnClickListener {
-            findNavController().navigate(R.id.action_OTPFragment_to_createAccountFragment)
+            //findNavController().navigate(R.id.action_createAccountFragment_to_OTPFragment)
         }
 
         return binding.root
