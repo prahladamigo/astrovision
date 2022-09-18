@@ -28,5 +28,19 @@
     <string name="send_to">send to</string>
     <string name="enter_4_digit_otp">ENTER 4 DIGIT OTP</string>
     <string name="confirm_otp">Confirm OTP</string>
+    <string name="create_account">Create\nAccount</string>
+    <string name="lbl_full_name">Full Name</string>
+    <string name="email_id">Email Id</string>
+    <string name="dob">Date of Birth</string>
+    <string name="birth_time">Birth Time</string>
+    <string name="birth_place">Birth Place</string>
+    <string name="sign_in">Sign In</string>
+
+    <string-array name="signature">
+        <item>Mr</item>
+        <item>Mrs</item>
+        <item>Ms</item>
+        <item>Miss</item>
+    </string-array>
 
 </resources>
