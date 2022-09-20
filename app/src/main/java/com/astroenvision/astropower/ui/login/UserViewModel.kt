@@ -29,9 +29,9 @@ class UserViewModel @Inject constructor(private val userRepository: UserReposito
     fun validateLogin(mobileNo: String): Pair<Boolean, String> {
         var result = Pair(true, "")
         if (TextUtils.isEmpty(mobileNo)) {
-            result = Pair(false, "Please enter mobile no")
+            result = Pair(false, "Please Enter Mobile No")
         } else if (!Utility.isValidMobile(mobileNo)) {
-            result = Pair(false, "Please enter correct Mobile No")
+            result = Pair(false, "Please Enter Correct Mobile No")
         }
         return result
     }

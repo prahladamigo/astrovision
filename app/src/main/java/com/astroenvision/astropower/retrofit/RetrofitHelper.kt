@@ -35,5 +35,11 @@ class RetrofitHelper {
         return retrofitBuilder.build().create(UserApi::class.java)
     }
 
+    @Singleton
+    @Provides
+    fun providesRegisterAPI(retrofitBuilder: Retrofit.Builder): CreateAccountApi {
+        return retrofitBuilder.build().create(CreateAccountApi::class.java)
+    }
+
 
 }

@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.astroenvision.astropower.R
+import com.astroenvision.astropower.common.Constants.MOBILE_NO
 import com.astroenvision.astropower.common.NetworkResult
 import com.astroenvision.astropower.common.Utility
 import com.astroenvision.astropower.common.Utility.Companion.showSnackBar
@@ -44,13 +45,17 @@ class LoginFragment : Fragment() {
 
         binding.txtContinueProceed.setOnClickListener {
             Utility.hideKeyboard(it)
-            val mobileNo = binding.edtMobile.text.toString()
+            val mobileNo = binding.txtMobile.text.toString()
             val validationResult = userViewModel.validateLogin(mobileNo)
             if (validationResult.first) {
                 val userRequest = getUserRequest()
                 userViewModel.userLogin(userRequest)
             } else {
-                showSnackBar(binding.root, validationResult.second)
+                showValidationErrors(validationResult.second)
+
+                /* binding.txtError.isVisible = true
+                 binding.txtError.text = validationResult.second*/
+               // showSnackBar(binding.root, validationResult.second)
             }
             bindObservers()
         }
@@ -58,23 +63,30 @@ class LoginFragment : Fragment() {
 
     private fun getUserRequest(): UserRequest {
         return binding.run {
-            UserRequest(edtMobile.text.toString())
+            UserRequest(txtMobile.text.toString())
         }
+    }
+
+    private fun showValidationErrors(error: String) {
+        showSnackBar(binding.root, error)
+        //binding.txtError.text = String.format(resources.getString(R.string.txt_error_message, error))
     }
 
     private fun bindObservers() {
         userViewModel.userResponseLiveData.observe(viewLifecycleOwner, Observer {
-            binding.progressBar.isVisible = false
+           // binding.progressBar.isVisible = false
             when (it) {
                 is NetworkResult.Success -> {
+                    val bundle = Bundle()
+                    bundle.putString(MOBILE_NO,binding.txtMobile.toString())
                     //  tokenManager.saveToken(it.data!!.token)
-                    findNavController().navigate(R.id.action_OTPFragment_to_createAccountFragment)
+                    findNavController().navigate(R.id.action_loginFragment_to_createAccountFragment,bundle)
                 }
                 is NetworkResult.Error -> {
                     showSnackBar(binding.root, it.message.toString())
                 }
                 is NetworkResult.Loading -> {
-                    binding.progressBar.isVisible = false
+                  //  binding.progressBar.isVisible = false
                 }
             }
         })
