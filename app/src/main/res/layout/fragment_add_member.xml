@@ -218,7 +218,7 @@
                 android:inputType="number"
                 android:paddingStart="@dimen/margin_10dp"
                 android:singleLine="true"
-                android:drawableRight="@drawable/ic__loc_pin"
+                android:drawableRight="@drawable/ic_location"
                 android:paddingRight="@dimen/padding_10"/>
 
         </LinearLayout>

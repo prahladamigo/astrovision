@@ -302,7 +302,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_my_profile" />
+                    android:src="@drawable/ic_astro_facts" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -328,7 +328,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_my_profile" />
+                    android:src="@drawable/ic_talk_to_astrologer" />
 
                 <TextView
                     android:layout_width="wrap_content"
