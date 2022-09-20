@@ -203,7 +203,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_my_profile" />
+                        android:src="@drawable/ic_family_details" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -246,7 +246,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_my_profile" />
+                        android:src="@drawable/ic_subscription" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -287,7 +287,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_my_profile" />
+                        android:src="@drawable/ic_language" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -321,7 +321,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/activity_margin_7dp"
-                    android:src="@drawable/ic_baseline_share_24" />
+                    android:src="@drawable/ic_refer_earn" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

@@ -1,5 +1,4 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:aapt="http://schemas.android.com/aapt"
     android:width="18dp"
     android:height="18dp"
     android:viewportWidth="18"
@@ -8,32 +7,10 @@
     <clip-path
         android:pathData="M0,0h18v18h-18z"/>
     <path
-        android:pathData="M12.375,1.125A1.125,1.125 0,0 1,13.5 2.25v13.5a1.125,1.125 0,0 1,-1.125 1.125H5.625A1.125,1.125 0,0 1,4.5 15.75V2.25A1.125,1.125 0,0 1,5.625 1.125ZM5.625,0a2.25,2.25 0,0 0,-2.25 2.25v13.5A2.25,2.25 0,0 0,5.625 18h6.75a2.25,2.25 0,0 0,2.25 -2.25V2.25A2.25,2.25 0,0 0,12.375 0Z">
-      <aapt:attr name="android:fillColor">
-        <gradient 
-            android:startY="-3.6525596E-17"
-            android:startX="9"
-            android:endY="18"
-            android:endX="9"
-            android:type="linear">
-          <item android:offset="0" android:color="#0A2C4F"/>
-          <item android:offset="1" android:color="#0F2C52"/>
-        </gradient>
-      </aapt:attr>
-    </path>
+        android:pathData="M12.375,1.125A1.125,1.125 0,0 1,13.5 2.25v13.5a1.125,1.125 0,0 1,-1.125 1.125H5.625A1.125,1.125 0,0 1,4.5 15.75V2.25A1.125,1.125 0,0 1,5.625 1.125ZM5.625,0a2.25,2.25 0,0 0,-2.25 2.25v13.5A2.25,2.25 0,0 0,5.625 18h6.75a2.25,2.25 0,0 0,2.25 -2.25V2.25A2.25,2.25 0,0 0,12.375 0Z"
+        android:fillColor="#0a2c4f"/>
     <path
-        android:pathData="M9,15.75a1.125,1.125 0,1 0,-1.125 -1.125A1.125,1.125 0,0 0,9 15.75Z">
-      <aapt:attr name="android:fillColor">
-        <gradient 
-            android:startY="13.5"
-            android:startX="9"
-            android:endY="15.75"
-            android:endX="9"
-            android:type="linear">
-          <item android:offset="0" android:color="#0A2C4F"/>
-          <item android:offset="1" android:color="#0F2C52"/>
-        </gradient>
-      </aapt:attr>
-    </path>
+        android:pathData="M9,15.75a1.125,1.125 0,1 0,-1.125 -1.125A1.125,1.125 0,0 0,9 15.75Z"
+        android:fillColor="#0a2c4f"/>
   </group>
 </vector>
