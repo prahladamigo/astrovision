@@ -28,7 +28,7 @@ class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
     private val userViewModel by activityViewModels<UserViewModel>()
-
+    private lateinit var mobileNo : String
     @Inject
     lateinit var tokenManager: TokenManager
 
@@ -47,7 +47,7 @@ class LoginFragment : Fragment() {
 
         binding.txtContinueProceed.setOnClickListener {
             Utility.hideKeyboard(it)
-            val mobileNo = binding.txtMobile.text.toString()
+             mobileNo = binding.txtMobile.text.toString()
             val validationResult = userViewModel.validateLogin(mobileNo)
             if (validationResult.first) {
                 val userRequest = getUserRequest()
@@ -82,18 +82,21 @@ class LoginFragment : Fragment() {
                     //  tokenManager.saveToken(it.data!!.token)
                     val bundle = Bundle()
                     if (it.data != null) {
+
                         val isRegister = it.data.isRegistered
-                        bundle.putString(MOBILE_NO, binding.txtMobile.toString())
+                        bundle.putString(MOBILE_NO, mobileNo)
                         if (isRegister) {
-                            findNavController().navigate(
-                                R.id.action_loginFragment_to_createAccountFragment,
-                                bundle
-                            )
-                        } else {
                             findNavController().navigate(
                                 R.id.action_loginFragment_to_OTPFragment,
                                 bundle
                             )
+                        } else {
+                            findNavController().navigate(
+                                R.id.action_loginFragment_to_createAccountFragment,
+                                bundle
+                            )
+
+
                         }
                     }
                 }
