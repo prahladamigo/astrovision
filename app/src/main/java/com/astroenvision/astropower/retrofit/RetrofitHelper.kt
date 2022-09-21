@@ -41,5 +41,10 @@ class RetrofitHelper {
         return retrofitBuilder.build().create(CreateAccountApi::class.java)
     }
 
+    @Singleton
+    @Provides
+    fun providesSendUserAPI(retrofitBuilder: Retrofit.Builder): OTPApi {
+        return retrofitBuilder.build().create(OTPApi::class.java)
+    }
 
 }
