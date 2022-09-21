@@ -37,5 +37,26 @@ class Utility {
                 Snackbar.make(view, message, Snackbar.LENGTH_SHORT)
             snackBar.show()
         }
+
+        fun getMonthName(monthNum: Int): String? {
+            var monthname = "Jan"
+            when (monthNum) {
+                0 -> monthname = "Jan"
+                1 -> monthname = "Feb"
+                2 -> monthname = "Mar"
+                3 -> monthname = "Apr"
+                4 -> monthname = "May"
+                5 -> monthname = "Jun"
+                6 -> monthname = "Jul"
+                7 -> monthname = "Aug"
+                8 -> monthname = "Sep"
+                9 -> monthname = "Oct"
+                10 -> monthname = "Nov"
+                11 -> monthname = "Dec"
+            }
+            return monthname
+        }
     }
+
+
 }

@@ -1,10 +1,14 @@
 package com.astroenvision.astropower.ui.register
 
+import android.annotation.SuppressLint
+import android.app.DatePickerDialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.TimePicker
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -12,21 +16,19 @@ import com.astroenvision.astropower.R
 import com.astroenvision.astropower.common.Constants.MOBILE_NO
 import com.astroenvision.astropower.common.NetworkResult
 import com.astroenvision.astropower.common.Utility
+import com.astroenvision.astropower.common.Utility.Companion.getMonthName
 import com.astroenvision.astropower.common.Utility.Companion.hideKeyboard
 import com.astroenvision.astropower.databinding.FragmentCreateAccountBinding
 import com.astroenvision.astropower.models.CreateAccountRequest
-import com.google.android.libraries.places.api.Places
-import com.google.android.libraries.places.api.model.Place
-import com.google.android.libraries.places.widget.Autocomplete
-import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 @AndroidEntryPoint
-class CreateAccountFragment : Fragment() {
+class CreateAccountFragment : Fragment(), View.OnClickListener {
     private var _binding: FragmentCreateAccountBinding? = null
     private val binding get() = _binding!!
     private val createAccountViewModel by activityViewModels<CreateAccountViewModel>()
-    private val apiKey = "AIzaSyDtiD-jLquwpdgxXndk7K_eAeM3lr4_8Xc"
+    //private val apiKey = "AIzaSyDtiD-jLquwpdgxXndk7K_eAeM3lr4_8Xc"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,10 +57,15 @@ class CreateAccountFragment : Fragment() {
             startActivity(intent)
         }
 */
-       val mobileNo = arguments?.getString(MOBILE_NO)
+        val mobileNo = arguments?.getString(MOBILE_NO)
 
         if (mobileNo != null)
             binding.txtMobile.setText(mobileNo)
+
+        binding.layoutDOB.setOnClickListener(this)
+        binding.txtDOB.setOnClickListener(this)
+        binding.layoutBT.setOnClickListener(this)
+        binding.txtBirthTime.setOnClickListener(this)
 
         binding.txtSinghIn.setOnClickListener {
             hideKeyboard(it)
@@ -72,6 +79,27 @@ class CreateAccountFragment : Fragment() {
         }
         bindObservers()
     }
+
+    private fun selectDOBPicker() {
+
+        val c = Calendar.getInstance()
+        val year = c.get(Calendar.YEAR)
+        val month = c.get(Calendar.MONTH)
+        val day = c.get(Calendar.DAY_OF_MONTH)
+
+        val datePicker = DatePickerDialog(
+            requireActivity(), /*R.style.TimePickerTheme,*/
+            { view, year, monthOfYear, dayOfMonth ->
+                "$dayOfMonth-${getMonthName(monthOfYear)}-$year".also { binding.txtDOB.text = it }
+            },
+            year,
+            month,
+            day
+        )
+        datePicker.datePicker.maxDate = c.timeInMillis
+        datePicker.show()
+    }
+
 
     private fun validateUserInput(): Pair<Boolean, String> {
         val name = binding.txtName.text.toString()
@@ -123,8 +151,11 @@ class CreateAccountFragment : Fragment() {
                 is NetworkResult.Success -> {
                     // tokenManager.saveToken(it.data!!.token)
                     val bundle = Bundle()
-                    bundle.putString(MOBILE_NO,binding.txtMobile.toString())
-                    findNavController().navigate(R.id.action_createAccountFragment_to_OTPFragment, bundle)
+                    bundle.putString(MOBILE_NO, binding.txtMobile.toString())
+                    findNavController().navigate(
+                        R.id.action_createAccountFragment_to_OTPFragment,
+                        bundle
+                    )
                 }
                 is NetworkResult.Error -> {
                     showValidationErrors(it.message.toString())
@@ -140,5 +171,30 @@ class CreateAccountFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+    override fun onClick(p0: View?) {
+        when (p0) {
+            binding.layoutDOB, binding.txtDOB -> {
+                selectDOBPicker()
+            }
+
+            binding.layoutBT, binding.txtBirthTime -> {
+                selectTimePicker()
+            }
+
+            binding.layoutSignature, binding.spinnerSignature -> {
+                selectSignature()
+            }
+        }
+    }
+
+    private fun selectSignature() {
+        TODO("Not yet implemented")
+    }
+
+    private fun selectTimePicker() {
+        TODO("Not yet implemented")
+    }
+
 
 }
