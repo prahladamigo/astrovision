@@ -78,7 +78,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/activity_margin_45dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/activity_margin_8dp"
                     android:layout_marginBottom="@dimen/activity_margin_12dp"
                     android:background="@drawable/edittext_rounded_style"
@@ -88,13 +88,14 @@
 
 
                     <RelativeLayout
+                        android:id="@+id/layoutSignature"
                         android:layout_width="@dimen/activity_margin_80dp"
                         android:layout_height="match_parent"
                         android:orientation="horizontal"
                         android:padding="@dimen/activity_margin_3dp">
 
                         <Spinner
-                            android:id="@+id/spinner_signature"
+                            android:id="@+id/spinnerSignature"
                             android:layout_width="@dimen/activity_margin_100dp"
                             android:layout_height="match_parent"
                             android:layout_gravity="center_vertical"
@@ -123,13 +124,15 @@
                     <EditText
                         android:id="@+id/txtName"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@null"
-                        android:ellipsize="end"
-                        android:focusableInTouchMode="true"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/margin_5dp"
+                        android:autofillHints=""
+                        android:background="@android:color/transparent"
+                        android:gravity="start"
                         android:imeOptions="actionNext"
                         android:inputType="text"
-                        android:maxLength="20"
+                        android:maxLength="50"
                         android:maxLines="1"
                         android:minHeight="48dp"
                         android:padding="@dimen/padding_15"
@@ -221,7 +224,7 @@
                         android:gravity="start"
                         android:imeOptions="actionDone"
                         android:inputType="textEmailAddress"
-                        android:maxLength="10"
+                        android:maxLength="50"
                         android:maxLines="1"
                         android:minHeight="48dp"
                         android:padding="@dimen/padding_15"
@@ -244,7 +247,7 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/activity_margin_3dp"
+                        android:layout_marginEnd="@dimen/activity_margin_5dp"
                         android:layout_weight="1"
                         android:orientation="vertical">
 
@@ -258,6 +261,7 @@
                             android:textStyle="normal" />
 
                         <LinearLayout
+                            android:id="@+id/layoutDOB"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_5dp"
@@ -268,11 +272,18 @@
                                 android:id="@+id/txtDOB"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="@dimen/margin_5dp"
                                 android:background="@null"
-                                android:minHeight="@dimen/margin_45dp"
-                                android:paddingStart="@dimen/margin_10dp"
+                                android:minHeight="48dp"
+                                android:padding="@dimen/activity_margin_15dp"
                                 android:paddingEnd="@dimen/padding_10"
                                 android:singleLine="true"
+                                android:textColor="@color/color_0F2C52"
+                                android:textColorHint="@color/colorPrimary"
+                                android:textCursorDrawable="@null"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
                                 app:drawableEndCompat="@drawable/ic_cal" />
 
                         </LinearLayout>
@@ -283,7 +294,7 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/activity_margin_3dp"
+                        android:layout_marginStart="@dimen/activity_margin_5dp"
                         android:layout_weight="1"
                         android:orientation="vertical">
 
@@ -297,6 +308,7 @@
                             android:textStyle="normal" />
 
                         <LinearLayout
+                            android:id="@+id/layoutBT"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_5dp"
@@ -307,11 +319,18 @@
                                 android:id="@+id/txtBirthTime"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="@dimen/margin_5dp"
                                 android:background="@null"
-                                android:minHeight="@dimen/margin_45dp"
-                                android:paddingStart="@dimen/margin_10dp"
+                                android:minHeight="48dp"
+                                android:padding="@dimen/activity_margin_15dp"
                                 android:paddingEnd="@dimen/margin_10dp"
                                 android:singleLine="true"
+                                android:textColor="@color/color_0F2C52"
+                                android:textColorHint="@color/colorPrimary"
+                                android:textCursorDrawable="@null"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
                                 app:drawableEndCompat="@drawable/ic_clock" />
 
                         </LinearLayout>
@@ -346,7 +365,7 @@
                         android:minHeight="@dimen/margin_45dp"
                         android:paddingStart="@dimen/margin_10dp"
                         android:paddingEnd="@dimen/margin_10dp"
-                        android:singleLine="true"/>
+                        android:singleLine="true" />
 
                 </LinearLayout>
 
