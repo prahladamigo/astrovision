@@ -284,7 +284,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/activity_margin_20dp"
             android:background="@drawable/round_solid_gray"
             android:paddingStart="@dimen/padding_5"
             android:paddingEnd="@dimen/margin_5dp"

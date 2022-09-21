@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_loginFragment_to_createAccountFragment"
             app:destination="@id/createAccountFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_OTPFragment"
+            app:destination="@id/OTPFragment" />
     </fragment>
     <fragment
         android:id="@+id/OTPFragment"
