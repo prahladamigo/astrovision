@@ -6,9 +6,6 @@
     android:layout_height="wrap_content"
     android:minHeight="?attr/actionBarSize"
     android:background="@color/color_E3EDF7"
-    app:popupTheme="@style/AppTheme.PopupOverlay"
-    app:subtitleTextAppearance="@style/ToolbarSubtitleAppearance"
-    app:titleTextAppearance="@style/ToolbarTitleAppearance"
     android:padding="@dimen/activity_margin_15dp">
 
     <ImageView

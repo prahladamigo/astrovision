@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.astroenvision.astropower.ui.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/menuFragment"
+        android:name="com.astroenvision.astropower.ui.MenuFragment"
+        android:label="fragment_menu"
+        tools:layout="@layout/fragment_menu" >
+        <action
+            android:id="@+id/action_menuFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_familyFragment"
+            app:destination="@id/familyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.astroenvision.astropower.ui.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/familyFragment"
+        android:name="com.astroenvision.astropower.ui.FamilyFragment"
+        android:label="fragment_family"
+        tools:layout="@layout/fragment_family" >
+        <action
+            android:id="@+id/action_familyFragment_to_addMemberFragment"
+            app:destination="@id/addMemberFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addMemberFragment"
+        android:name="com.astroenvision.astropower.ui.AddMemberFragment"
+        android:label="fragment_add_member2"
+        tools:layout="@layout/fragment_add_member" />
+</navigation>

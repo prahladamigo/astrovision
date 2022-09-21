@@ -51,15 +51,4 @@
         <!-- include other attributes you want to change: textColor, textStyle, etc -->
     </style>
 
-    <style name="Theme.AstroPower.NoActionBarFarmer">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:statusBarColor">@color/dark_blue</item>
-        <item name="android:windowBackground">@color/white</item>
-        <item name="android:windowDisablePreview">true</item>
-        <!--<item name="colorPrimary">@color/my_action_bar_color</item>-->
-    </style>
-
-
 </resources>

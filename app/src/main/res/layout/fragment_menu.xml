@@ -26,32 +26,15 @@
             android:orientation="vertical">
 
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_farmer_img"
-                android:layout_width="@dimen/activity_margin_75dp"
-                android:layout_height="@dimen/activity_margin_75dp"
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/Image_Userprofile"
+                android:layout_width="@dimen/activity_margin_80dp"
+                android:layout_height="@dimen/activity_margin_80dp"
                 android:layout_gravity="center"
-                android:layout_marginBottom="@dimen/activity_margin_15dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="@dimen/activity_margin_37.5dp">
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="@dimen/activity_margin_70dp"
-                    android:layout_height="@dimen/activity_margin_70dp"
-                    android:layout_gravity="center"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="@dimen/activity_margin_35dp">
-
-                    <ImageView
-                        android:id="@+id/farmer_img_iv"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/ic_clock" />
-
-                </androidx.cardview.widget.CardView>
-
-            </androidx.cardview.widget.CardView>
+                android:src="@drawable/ic_user_image"
+                app:civ_border_color="@color/bordercolor"
+                app:civ_border_width="2dp"
+                app:civ_circle_background_color="@color/bordercolor" />
 
 
             <LinearLayout
@@ -139,7 +122,6 @@
             </LinearLayout>
 
 
-
             <LinearLayout
                 android:id="@+id/main_lay"
                 android:layout_width="match_parent"
@@ -148,7 +130,6 @@
                 android:background="@drawable/edittext_rounded_style"
                 android:orientation="vertical"
                 android:padding="@dimen/activity_margin_15dp">
-
 
                 <LinearLayout
                     android:id="@+id/ll_my_profile"
@@ -160,41 +141,28 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/activity_margin_15dp"
                         android:src="@drawable/ic_my_profile" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:paddingLeft="@dimen/activity_margin_15dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/activity_margin_15dp"
-                            android:fontFamily="@font/robo_bold"
-                            android:text="@string/my_profile"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/text_size_14sp" />
+                        android:layout_marginBottom="@dimen/activity_margin_15dp"
+                        android:fontFamily="@font/robo_bold"
+                        android:text="@string/my_profile"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14sp" />
 
 
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="@color/color_f3f3f3" />
-
-                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/color_f3f3f3" />
 
                 </LinearLayout>
 
-
-                <!--
-                *************************
-                -->
-
                 <LinearLayout
-                    android:id="@+id/ll_my_farms"
+                    android:id="@+id/ll_family_details"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/activity_margin_15dp"
@@ -203,41 +171,28 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/activity_margin_15dp"
                         android:src="@drawable/ic_family_details" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:paddingLeft="@dimen/activity_margin_15dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/activity_margin_15dp"
-                            android:fontFamily="@font/robo_bold"
-                            android:text="@string/my_family_details"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/text_size_14sp" />
+                        android:layout_marginBottom="@dimen/activity_margin_15dp"
+                        android:fontFamily="@font/robo_bold"
+                        android:text="@string/my_family_details"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14sp" />
 
 
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="@color/color_f3f3f3" />
-
-                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/color_f3f3f3" />
 
                 </LinearLayout>
 
-
-                <!--
-               *************************
-               -->
-
                 <LinearLayout
-                    android:id="@+id/ll_my_crops_material"
+                    android:id="@+id/ll_my_subscription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/activity_margin_15dp"
@@ -246,40 +201,28 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/activity_margin_15dp"
                         android:src="@drawable/ic_subscription" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:paddingLeft="@dimen/activity_margin_15dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/activity_margin_15dp"
-                            android:fontFamily="@font/robo_bold"
-                            android:text="@string/my_subscription"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/text_size_14sp" />
+                        android:layout_marginBottom="@dimen/activity_margin_15dp"
+                        android:fontFamily="@font/robo_bold"
+                        android:text="@string/my_subscription"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14sp" />
 
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="@color/color_f3f3f3" />
-
-                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/color_f3f3f3" />
 
                 </LinearLayout>
 
-
-                <!--
-               *************************
-               -->
-
                 <LinearLayout
-                    android:id="@+id/ll_my_assets"
+                    android:id="@+id/ll_language_preference"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -287,27 +230,18 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/activity_margin_15dp"
                         android:src="@drawable/ic_language" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:paddingLeft="@dimen/activity_margin_15dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/robo_bold"
-                            android:text="@string/language_preference"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/text_size_14sp" />
-
-
-                    </LinearLayout>
+                        android:fontFamily="@font/robo_bold"
+                        android:text="@string/language_preference"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_14sp" />
 
                 </LinearLayout>
-
 
             </LinearLayout>
 
@@ -345,9 +279,8 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/color_f3f3f3"
-                android:layout_marginBottom="@dimen/activity_margin_15dp"/>
-
+                android:layout_marginBottom="@dimen/activity_margin_15dp"
+                android:background="@color/color_f3f3f3" />
 
 
             <LinearLayout
@@ -360,7 +293,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/activity_margin_7dp"
-                    android:src="@drawable/ic_rate_us"/>
+                    android:src="@drawable/ic_rate_us" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -385,9 +318,8 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/color_f3f3f3"
-                android:layout_marginBottom="@dimen/activity_margin_15dp"/>
-
+                android:layout_marginBottom="@dimen/activity_margin_15dp"
+                android:background="@color/color_f3f3f3" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -398,7 +330,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/activity_margin_7dp"
-                    android:src="@drawable/ic_logout"/>
+                    android:src="@drawable/ic_logout" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -423,57 +355,59 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/color_f3f3f3"
-                android:layout_marginBottom="@dimen/activity_margin_15dp"/>
+                android:layout_marginBottom="@dimen/activity_margin_15dp"
+                android:background="@color/color_f3f3f3" />
 
 
             <LinearLayout
                 android:id="@+id/ll_call"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:visibility="visible"
+                android:layout_marginBottom="@dimen/activity_margin_15dp"
                 android:gravity="center_vertical"
-                android:layout_marginBottom="@dimen/activity_margin_15dp">
+                android:orientation="horizontal"
+                android:visibility="visible">
 
 
                 <View
                     android:layout_width="@dimen/activity_margin_1dp"
                     android:layout_height="match_parent"
-                    android:background="@color/bordercolor"
                     android:layout_marginLeft="@dimen/activity_margin_10dp"
-                    android:layout_marginRight="@dimen/activity_margin_10dp"/>
+                    android:layout_marginRight="@dimen/activity_margin_10dp"
+                    android:background="@color/bordercolor" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingRight="@dimen/activity_margin_15dp"
-                    android:paddingTop="@dimen/activity_margin_8dp"
-                    android:paddingBottom="@dimen/activity_margin_8dp">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:fontFamily="@font/robo_medium"
-                        android:textSize="@dimen/text_size_14sp"
-                        android:gravity="end"
-                        android:text="@string/powered_by"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/light_gray"
-                        android:fontFamily="@font/robo_regular"
-                        android:gravity="end"
-                        android:textSize="@dimen/text_size_12sp"
-                        android:text="@string/version"/>
-
-                </LinearLayout>
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/activity_margin_8dp"
+                android:paddingRight="@dimen/activity_margin_15dp"
+                android:paddingBottom="@dimen/activity_margin_8dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/robo_medium"
+                    android:gravity="end"
+                    android:text="@string/powered_by"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_14sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/robo_regular"
+                    android:gravity="end"
+                    android:text="@string/version"
+                    android:textColor="@color/light_gray"
+                    android:textSize="@dimen/text_size_12sp" />
+
+            </LinearLayout>
         </LinearLayout>
+
 
     </ScrollView>
 
