@@ -27,7 +27,7 @@ class CreateAccountFragment : Fragment() {
     private val binding get() = _binding!!
     private val createAccountViewModel by activityViewModels<CreateAccountViewModel>()
     private val apiKey = "AIzaSyDtiD-jLquwpdgxXndk7K_eAeM3lr4_8Xc"
-    private var mobileNo : String? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -55,7 +55,7 @@ class CreateAccountFragment : Fragment() {
             startActivity(intent)
         }
 */
-         mobileNo = arguments?.getString(MOBILE_NO)
+       val mobileNo = arguments?.getString(MOBILE_NO)
 
         if (mobileNo != null)
             binding.txtMobile.setText(mobileNo)

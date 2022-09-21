@@ -9,5 +9,6 @@ object Constants {
     const val PREFS_TOKEN_FILE = "prefs_token_file"
 
     const val MOBILE_NO = "mobile_no"
+    const val IS_REGISTER = "is_register"
 
 }

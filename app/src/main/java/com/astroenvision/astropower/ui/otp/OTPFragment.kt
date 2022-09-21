@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.astroenvision.astropower.R
 import com.astroenvision.astropower.activities.MainActivity
@@ -14,6 +15,7 @@ import com.astroenvision.astropower.common.Constants
 import com.astroenvision.astropower.common.NetworkResult
 import com.astroenvision.astropower.common.Utility
 import com.astroenvision.astropower.databinding.FragmentOtpBinding
+import com.astroenvision.astropower.models.UserRequest
 import com.astroenvision.astropower.models.VerifyOTPRequest
 import com.astroenvision.astropower.ui.login.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,6 +24,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class OTPFragment : Fragment() {
     private var _binding: FragmentOtpBinding? = null
     private val binding get() = _binding!!
+
+    private val userViewModel by activityViewModels<UserViewModel>()
     private val otpViewModel by activityViewModels<OTPViewModel>()
 
     private lateinit var mobileNo: String
@@ -46,6 +50,11 @@ class OTPFragment : Fragment() {
 
         mobileNo = arguments?.getString(Constants.MOBILE_NO).toString()
 
+        val userRequest = sendOTPRequest()
+        userViewModel.userLogin(userRequest)
+
+        bindOTPObservers()
+
         binding.txtOTP.setOnClickListener {
             val otp =
                 binding.etOtp1.toString() + binding.etOtp2.toString() + binding.etOtp3.toString() + binding.etOtp4.toString()
@@ -59,10 +68,32 @@ class OTPFragment : Fragment() {
             } else {
                 showValidationErrors(validationResult.second)
             }
-
+            bindObservers()
         }
 
+    }
 
+    private fun bindOTPObservers() {
+        userViewModel.userResponseLiveData.observe(viewLifecycleOwner, Observer {
+            // binding.progressBar.isVisible = false
+            when (it) {
+                is NetworkResult.Success -> {
+                    Utility.showSnackBar(binding.root, it.message.toString())
+                }
+                is NetworkResult.Error -> {
+                    Utility.showSnackBar(binding.root, it.message.toString())
+                }
+                is NetworkResult.Loading -> {
+                    //  binding.progressBar.isVisible = false
+                }
+            }
+        })
+    }
+
+    private fun sendOTPRequest(): UserRequest {
+        return binding.run {
+            UserRequest(mobileNo)
+        }
     }
 
     private fun getOTPRequest(): VerifyOTPRequest {

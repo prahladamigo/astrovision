@@ -3,17 +3,14 @@ package com.astroenvision.astropower.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.astroenvision.astropower.common.NetworkResult
-import com.astroenvision.astropower.models.CreateAccountRequest
-import com.astroenvision.astropower.models.CreateAccountResponse
 import com.astroenvision.astropower.models.VerifyOTPRequest
 import com.astroenvision.astropower.models.VerifyOTPResponse
-import com.astroenvision.astropower.retrofit.CreateAccountApi
-import com.astroenvision.astropower.retrofit.VerifyOTPApi
+import com.astroenvision.astropower.retrofit.OTPApi
 import org.json.JSONObject
 import retrofit2.Response
 import javax.inject.Inject
 
-class VerifyOTPRepository @Inject constructor(private val verifyOTPApi: VerifyOTPApi) {
+class VerifyOTPRepository @Inject constructor(private val OTPApi: OTPApi) {
 
     private val _verifyOTPResponseLiveData = MutableLiveData<NetworkResult<VerifyOTPResponse>>()
 
@@ -23,7 +20,7 @@ class VerifyOTPRepository @Inject constructor(private val verifyOTPApi: VerifyOT
 
     suspend fun verifyOTP(verifyOTPRequest: VerifyOTPRequest) {
         _verifyOTPResponseLiveData.postValue(NetworkResult.Loading())
-        val response = verifyOTPApi.verifyOtp(verifyOTPRequest)
+        val response = OTPApi.verifyOtp(verifyOTPRequest)
         handleResponse(response)
     }
 

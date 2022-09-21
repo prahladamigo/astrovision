@@ -10,12 +10,14 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.astroenvision.astropower.R
+import com.astroenvision.astropower.common.Constants.IS_REGISTER
 import com.astroenvision.astropower.common.Constants.MOBILE_NO
 import com.astroenvision.astropower.common.NetworkResult
 import com.astroenvision.astropower.common.Utility
 import com.astroenvision.astropower.common.Utility.Companion.showSnackBar
 import com.astroenvision.astropower.databinding.FragmentLoginBinding
 import com.astroenvision.astropower.models.UserRequest
+import com.astroenvision.astropower.models.UserResponse
 import com.cheezycode.notesample.utils.TokenManager
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -55,7 +57,7 @@ class LoginFragment : Fragment() {
 
                 /* binding.txtError.isVisible = true
                  binding.txtError.text = validationResult.second*/
-               // showSnackBar(binding.root, validationResult.second)
+                // showSnackBar(binding.root, validationResult.second)
             }
             bindObservers()
         }
@@ -74,19 +76,32 @@ class LoginFragment : Fragment() {
 
     private fun bindObservers() {
         userViewModel.userResponseLiveData.observe(viewLifecycleOwner, Observer {
-           // binding.progressBar.isVisible = false
+            // binding.progressBar.isVisible = false
             when (it) {
                 is NetworkResult.Success -> {
-                    val bundle = Bundle()
-                    bundle.putString(MOBILE_NO,binding.txtMobile.toString())
                     //  tokenManager.saveToken(it.data!!.token)
-                    findNavController().navigate(R.id.action_loginFragment_to_createAccountFragment,bundle)
+                    val bundle = Bundle()
+                    if (it.data != null) {
+                        val isRegister = it.data.isRegistered
+                        bundle.putString(MOBILE_NO, binding.txtMobile.toString())
+                        if (isRegister) {
+                            findNavController().navigate(
+                                R.id.action_loginFragment_to_createAccountFragment,
+                                bundle
+                            )
+                        } else {
+                            findNavController().navigate(
+                                R.id.action_loginFragment_to_OTPFragment,
+                                bundle
+                            )
+                        }
+                    }
                 }
                 is NetworkResult.Error -> {
                     showSnackBar(binding.root, it.message.toString())
                 }
                 is NetworkResult.Loading -> {
-                  //  binding.progressBar.isVisible = false
+                    //  binding.progressBar.isVisible = false
                 }
             }
         })
