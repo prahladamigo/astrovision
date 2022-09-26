@@ -20,11 +20,11 @@
         android:id="@+id/OTPFragment"
         android:name="com.astroenvision.astropower.ui.otp.OTPFragment"
         android:label="fragment_otp"
-        tools:layout="@layout/fragment_otp"/>
+        tools:layout="@layout/fragment_otp" />
     <fragment
         android:id="@+id/createAccountFragment"
         android:name="com.astroenvision.astropower.ui.register.CreateAccountFragment"
-        android:label="fragment_create_account" >
+        android:label="fragment_create_account">
         <action
             android:id="@+id/action_createAccountFragment_to_OTPFragment"
             app:destination="@id/OTPFragment" />
