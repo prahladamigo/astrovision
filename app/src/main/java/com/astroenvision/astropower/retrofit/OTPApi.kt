@@ -12,6 +12,6 @@ interface OTPApi {
     suspend fun verifyOtp(@Body verifyOTPRequest: VerifyOTPRequest): Response<VerifyOTPResponse>
 
     @POST("/api/SendOtp")
-    suspend fun sendOTP(@Body userRequest: UserRequest): Response<UserResponse>
+    suspend fun sendOTP(@Body sendOTPRequest: SendOTPRequest): Response<UserResponse>
 
 }

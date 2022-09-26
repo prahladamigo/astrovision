@@ -1,18 +1,19 @@
 package com.astroenvision.astropower.ui.register
 
-import android.annotation.SuppressLint
 import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.TimePicker
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.astroenvision.astropower.R
+import com.astroenvision.astropower.common.Constants.IS_ACCOUNT_CREATED
+import com.astroenvision.astropower.common.Constants.IS_REGISTER
 import com.astroenvision.astropower.common.Constants.MOBILE_NO
 import com.astroenvision.astropower.common.NetworkResult
 import com.astroenvision.astropower.common.Utility
@@ -28,7 +29,10 @@ class CreateAccountFragment : Fragment(), View.OnClickListener {
     private var _binding: FragmentCreateAccountBinding? = null
     private val binding get() = _binding!!
     private val createAccountViewModel by activityViewModels<CreateAccountViewModel>()
+
     //private val apiKey = "AIzaSyDtiD-jLquwpdgxXndk7K_eAeM3lr4_8Xc"
+    private var isRegister: Boolean? = null
+    private lateinit var enteredMobileNo: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,9 +62,13 @@ class CreateAccountFragment : Fragment(), View.OnClickListener {
         }
 */
         val mobileNo = arguments?.getString(MOBILE_NO)
+        isRegister = arguments?.getBoolean(IS_REGISTER)
 
-        if (mobileNo != null)
+        if (mobileNo != null) {
             binding.txtMobile.setText(mobileNo)
+            binding.txtMobile.isEnabled = false
+            enteredMobileNo = mobileNo
+        }
 
         binding.layoutDOB.setOnClickListener(this)
         binding.txtDOB.setOnClickListener(this)
@@ -73,15 +81,14 @@ class CreateAccountFragment : Fragment(), View.OnClickListener {
             if (validationResult.first) {
                 val userRequest = getCreateAccountRequest()
                 createAccountViewModel.createAccount(userRequest)
+                bindObservers()
             } else {
                 showValidationErrors(validationResult.second)
             }
         }
-        bindObservers()
     }
 
     private fun selectDOBPicker() {
-
         val c = Calendar.getInstance()
         val year = c.get(Calendar.YEAR)
         val month = c.get(Calendar.MONTH)
@@ -89,7 +96,7 @@ class CreateAccountFragment : Fragment(), View.OnClickListener {
 
         val datePicker = DatePickerDialog(
             requireActivity(), /*R.style.TimePickerTheme,*/
-            { view, year, monthOfYear, dayOfMonth ->
+            { _, year, monthOfYear, dayOfMonth ->
                 "$dayOfMonth-${getMonthName(monthOfYear)}-$year".also { binding.txtDOB.text = it }
             },
             year,
@@ -146,22 +153,26 @@ class CreateAccountFragment : Fragment(), View.OnClickListener {
 
     private fun bindObservers() {
         createAccountViewModel.userResponseLiveData.observe(viewLifecycleOwner, Observer {
-            // binding.progressBar.isVisible = false
+            binding.progressBar.isVisible = true
             when (it) {
                 is NetworkResult.Success -> {
                     // tokenManager.saveToken(it.data!!.token)
+                    binding.progressBar.isVisible = false
+
                     val bundle = Bundle()
-                    bundle.putString(MOBILE_NO, binding.txtMobile.toString())
+                    bundle.putString(MOBILE_NO, enteredMobileNo)
+                    bundle.putBoolean(IS_ACCOUNT_CREATED, true)
                     findNavController().navigate(
                         R.id.action_createAccountFragment_to_OTPFragment,
                         bundle
                     )
                 }
                 is NetworkResult.Error -> {
+                    binding.progressBar.isVisible = false
                     showValidationErrors(it.message.toString())
                 }
                 is NetworkResult.Loading -> {
-                    // binding.progressBar.isVisible = true
+                    binding.progressBar.isVisible = true
                 }
             }
         })
@@ -172,19 +183,13 @@ class CreateAccountFragment : Fragment(), View.OnClickListener {
         _binding = null
     }
 
-    override fun onClick(p0: View?) {
-        when (p0) {
-            binding.layoutDOB, binding.txtDOB -> {
-                selectDOBPicker()
-            }
+    override fun onClick(view: View?) {
+        when (view) {
+            binding.layoutDOB, binding.txtDOB -> selectDOBPicker()
 
-            binding.layoutBT, binding.txtBirthTime -> {
-                selectTimePicker()
-            }
+            binding.layoutBT, binding.txtBirthTime -> selectTimePicker()
 
-            binding.layoutSignature, binding.spinnerSignature -> {
-                selectSignature()
-            }
+            binding.layoutSignature, binding.spinnerSignature -> selectSignature()
         }
     }
 
@@ -193,8 +198,20 @@ class CreateAccountFragment : Fragment(), View.OnClickListener {
     }
 
     private fun selectTimePicker() {
-        TODO("Not yet implemented")
+        val c = Calendar.getInstance()
+        val hour = c.get(Calendar.HOUR)
+        val minute = c.get(Calendar.MINUTE)
+
+        val tpd = TimePickerDialog(
+            requireActivity(),
+            { _, h, m ->
+                binding.txtBirthTime.text = Utility.convert24To12System(h, m)
+            },
+            hour,
+            minute,
+            false
+        )
+
+        tpd.show()
     }
-
-
 }

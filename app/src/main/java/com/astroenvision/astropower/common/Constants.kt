@@ -10,5 +10,6 @@ object Constants {
 
     const val MOBILE_NO = "mobile_no"
     const val IS_REGISTER = "is_register"
+    const val IS_ACCOUNT_CREATED = "is_account_created"
 
 }

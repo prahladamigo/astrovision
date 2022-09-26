@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.astroenvision.astropower.R
 import com.astroenvision.astropower.common.Constants.IS_REGISTER
 import com.astroenvision.astropower.common.Constants.MOBILE_NO
+import com.astroenvision.astropower.common.LoadingDialog
 import com.astroenvision.astropower.common.NetworkResult
 import com.astroenvision.astropower.common.Utility
 import com.astroenvision.astropower.common.Utility.Companion.showSnackBar
@@ -28,7 +29,8 @@ class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
     private val userViewModel by activityViewModels<UserViewModel>()
-    private lateinit var mobileNo : String
+    private lateinit var mobileNo: String
+
     @Inject
     lateinit var tokenManager: TokenManager
 
@@ -47,19 +49,15 @@ class LoginFragment : Fragment() {
 
         binding.txtContinueProceed.setOnClickListener {
             Utility.hideKeyboard(it)
-             mobileNo = binding.txtMobile.text.toString()
+            mobileNo = binding.txtMobile.text.toString()
             val validationResult = userViewModel.validateLogin(mobileNo)
             if (validationResult.first) {
                 val userRequest = getUserRequest()
                 userViewModel.userLogin(userRequest)
+                bindObservers()
             } else {
                 showValidationErrors(validationResult.second)
-
-                /* binding.txtError.isVisible = true
-                 binding.txtError.text = validationResult.second*/
-                // showSnackBar(binding.root, validationResult.second)
             }
-            bindObservers()
         }
     }
 
@@ -71,18 +69,20 @@ class LoginFragment : Fragment() {
 
     private fun showValidationErrors(error: String) {
         showSnackBar(binding.root, error)
-        //binding.txtError.text = String.format(resources.getString(R.string.txt_error_message, error))
     }
 
     private fun bindObservers() {
         userViewModel.userResponseLiveData.observe(viewLifecycleOwner, Observer {
-            // binding.progressBar.isVisible = false
+            /* val loading = LoadingDialog(requireActivity())
+             loading.startLoading()*/
+            binding.progressBar.isVisible = true
             when (it) {
                 is NetworkResult.Success -> {
+                    // loading.isDismiss()
+                    binding.progressBar.isVisible = false
                     //  tokenManager.saveToken(it.data!!.token)
                     val bundle = Bundle()
                     if (it.data != null) {
-
                         val isRegister = it.data.isRegistered
                         bundle.putString(MOBILE_NO, mobileNo)
                         if (isRegister) {
@@ -96,15 +96,17 @@ class LoginFragment : Fragment() {
                                 bundle
                             )
 
-
                         }
                     }
                 }
                 is NetworkResult.Error -> {
+                    //  loading.isDismiss()
+                    binding.progressBar.isVisible = false
                     showSnackBar(binding.root, it.message.toString())
                 }
                 is NetworkResult.Loading -> {
-                    //  binding.progressBar.isVisible = false
+                    binding.progressBar.isVisible = true
+                    //loading.startLoading()
                 }
             }
         })

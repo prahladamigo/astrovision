@@ -3,6 +3,7 @@ package com.astroenvision.astropower.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.astroenvision.astropower.common.NetworkResult
+import com.astroenvision.astropower.models.SendOTPRequest
 import com.astroenvision.astropower.models.UserRequest
 import com.astroenvision.astropower.models.UserResponse
 import com.astroenvision.astropower.retrofit.OTPApi
@@ -15,13 +16,13 @@ class SendOTPRepository @Inject constructor(private val otpApi: OTPApi) {
 
     private val _otpResponseLiveData = MutableLiveData<NetworkResult<UserResponse>>()
 
-    val userResponseLiveData: LiveData<NetworkResult<UserResponse>>
+    val sendOTPResponseLiveData: LiveData<NetworkResult<UserResponse>>
         get() = _otpResponseLiveData
 
 
-    suspend fun loginUser(userRequest: UserRequest) {
+    suspend fun sendOTP(sendOTPRequest: SendOTPRequest) {
         _otpResponseLiveData.postValue(NetworkResult.Loading())
-        val response = otpApi.sendOTP(userRequest)
+        val response = otpApi.sendOTP(sendOTPRequest)
         handleResponse(response)
     }
 

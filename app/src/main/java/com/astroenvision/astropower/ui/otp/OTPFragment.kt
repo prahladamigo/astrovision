@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -15,6 +16,7 @@ import com.astroenvision.astropower.common.Constants
 import com.astroenvision.astropower.common.NetworkResult
 import com.astroenvision.astropower.common.Utility
 import com.astroenvision.astropower.databinding.FragmentOtpBinding
+import com.astroenvision.astropower.models.SendOTPRequest
 import com.astroenvision.astropower.models.UserRequest
 import com.astroenvision.astropower.models.VerifyOTPRequest
 import com.astroenvision.astropower.ui.login.UserViewModel
@@ -25,7 +27,7 @@ class OTPFragment : Fragment() {
     private var _binding: FragmentOtpBinding? = null
     private val binding get() = _binding!!
 
-    private val userViewModel by activityViewModels<UserViewModel>()
+    private val sendOTPViewModel by activityViewModels<SendOTPViewModel>()
     private val otpViewModel by activityViewModels<OTPViewModel>()
 
     private lateinit var mobileNo: String
@@ -37,10 +39,6 @@ class OTPFragment : Fragment() {
     ): View? {
         _binding = FragmentOtpBinding.inflate(inflater, container, false)
 
-        binding.txtOTP.setOnClickListener {
-            //findNavController().navigate(R.id.action_createAccountFragment_to_OTPFragment)
-        }
-
         return binding.root
 
     }
@@ -49,11 +47,13 @@ class OTPFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         mobileNo = arguments?.getString(Constants.MOBILE_NO).toString()
+        val isAccountCreated = arguments?.getBoolean(Constants.IS_ACCOUNT_CREATED)
 
-        val userRequest = sendOTPRequest()
-        userViewModel.userLogin(userRequest)
-
-        bindOTPObservers()
+        if (isAccountCreated == true) {
+            val sendOTPRequest = sendOTPRequest()
+            sendOTPViewModel.sendOTP(sendOTPRequest)
+            bindOTPObservers()
+        }
 
         binding.txtOTP.setOnClickListener {
             val otp =
@@ -64,35 +64,37 @@ class OTPFragment : Fragment() {
             if (validationResult.first) {
                 otpValue = otp
                 otpViewModel.verifyOTP(getOTPRequest())
-
+                bindObservers()
             } else {
                 showValidationErrors(validationResult.second)
             }
-            bindObservers()
         }
 
     }
 
     private fun bindOTPObservers() {
-        userViewModel.userResponseLiveData.observe(viewLifecycleOwner, Observer {
-            // binding.progressBar.isVisible = false
+        sendOTPViewModel.sendOTPResponseLiveData.observe(viewLifecycleOwner, Observer {
+            binding.progressBar.isVisible = true
             when (it) {
                 is NetworkResult.Success -> {
-                    Utility.showSnackBar(binding.root, it.message.toString())
+                    binding.progressBar.isVisible = false
+                    if (it.data != null)
+                        Utility.showSnackBar(binding.root, it.data.message)
                 }
                 is NetworkResult.Error -> {
+                    binding.progressBar.isVisible = false
                     Utility.showSnackBar(binding.root, it.message.toString())
                 }
                 is NetworkResult.Loading -> {
-                    //  binding.progressBar.isVisible = false
+                    binding.progressBar.isVisible = true
                 }
             }
         })
     }
 
-    private fun sendOTPRequest(): UserRequest {
+    private fun sendOTPRequest(): SendOTPRequest {
         return binding.run {
-            UserRequest(mobileNo)
+            SendOTPRequest(mobileNo)
         }
     }
 
@@ -104,21 +106,23 @@ class OTPFragment : Fragment() {
 
     private fun showValidationErrors(error: String) {
         Utility.showSnackBar(binding.root, error)
-        //binding.txtError.text = String.format(resources.getString(R.string.txt_error_message, error))
     }
 
     private fun bindObservers() {
         otpViewModel.verifyOTPResponseLiveData.observe(viewLifecycleOwner) {
+            binding.progressBar.isVisible = true
             when (it) {
                 is NetworkResult.Success -> {
+                    binding.progressBar.isVisible = false
                     val intent = Intent(context, MainActivity::class.java)
                     startActivity(intent)
                 }
                 is NetworkResult.Error -> {
+                    binding.progressBar.isVisible = false
                     Utility.showSnackBar(binding.root, it.message.toString())
                 }
                 is NetworkResult.Loading -> {
-                    //  binding.progressBar.isVisible = false
+                    binding.progressBar.isVisible = true
                 }
             }
         }

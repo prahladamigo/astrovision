@@ -51,7 +51,7 @@ class CreateAccountViewModel @Inject constructor(private val createAccountReposi
             result = Pair(false, "Please Enter Valid Email Id")
         } else if (TextUtils.isEmpty(dob)) {
             result = Pair(false, "Please Enter Date of Birth")
-        } else if (!Utility.isValidMobile(birthTime)) {
+        } else if (TextUtils.isEmpty(birthTime)) {
             result = Pair(false, "Please Enter Birth Time")
         }else if (TextUtils.isEmpty(birthPlace)) {
             result = Pair(false, "Please Enter Place")

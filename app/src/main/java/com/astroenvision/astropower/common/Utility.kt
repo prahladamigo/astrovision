@@ -56,7 +56,28 @@ class Utility {
             }
             return monthname
         }
+
+        fun convert24To12System(hour: Int, minute: Int): String? {
+            var hour = hour
+            var time = ""
+            var am_pm = ""
+            if (hour < 12) {
+                if (hour == 0) hour = 12
+                am_pm = "AM"
+            } else {
+                if (hour != 12) hour -= 12
+                am_pm = "PM"
+            }
+            var h = hour.toString() + ""
+            var m = minute.toString() + ""
+            if (h.length == 1) h = "0$h"
+            if (m.length == 1) m = "0$m"
+            time = "$h:$m $am_pm"
+            return time
+        }
     }
+
+
 
 
 }
