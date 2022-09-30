@@ -4,6 +4,10 @@
     android:layout_height="match_parent"
     android:padding="@dimen/padding_20">
 
+    <RelativeLayout
+        android:id="@+id/progress_view_rl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
     <LinearLayout
         android:layout_width="match_parent"

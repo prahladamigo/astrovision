@@ -1,17 +1,25 @@
 package com.astroenvision.astropower.ui.register
 
+import android.app.ActionBar
 import android.app.DatePickerDialog
+import android.app.Dialog
 import android.app.TimePickerDialog
 import android.os.Bundle
+import android.text.Selection.setSelection
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ProgressBar
+import android.widget.RelativeLayout
 import androidx.core.view.isVisible
+import androidx.databinding.adapters.TextViewBindingAdapter.setText
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.astroenvision.astropower.R
+import com.astroenvision.astropower.adapter.PlaceArrayAdapter
 import com.astroenvision.astropower.common.Constants.IS_ACCOUNT_CREATED
 import com.astroenvision.astropower.common.Constants.IS_REGISTER
 import com.astroenvision.astropower.common.Constants.MOBILE_NO
@@ -21,6 +29,10 @@ import com.astroenvision.astropower.common.Utility.Companion.getMonthName
 import com.astroenvision.astropower.common.Utility.Companion.hideKeyboard
 import com.astroenvision.astropower.databinding.FragmentCreateAccountBinding
 import com.astroenvision.astropower.models.CreateAccountRequest
+import com.astroenvision.astropower.models.PlaceDataModel
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.net.PlacesClient
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
@@ -29,10 +41,13 @@ class CreateAccountFragment : Fragment(), View.OnClickListener {
     private var _binding: FragmentCreateAccountBinding? = null
     private val binding get() = _binding!!
     private val createAccountViewModel by activityViewModels<CreateAccountViewModel>()
-
-    //private val apiKey = "AIzaSyDtiD-jLquwpdgxXndk7K_eAeM3lr4_8Xc"
+    private val apiKey = "AIzaSyB0wAEr94RuPfcfE2dV5Ed_2r_joDsG2YA"
     private var isRegister: Boolean? = null
     private lateinit var enteredMobileNo: String
+    private lateinit var dialog: Dialog
+
+    private var placeAdapter: PlaceArrayAdapter? = null
+    private lateinit var mPlacesClient: PlacesClient
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,7 +61,7 @@ class CreateAccountFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        dialog = Utility.progressDialog(binding.root.context)
         /* // Initialize the SDK
         if(!Places.isInitialized()) {
             Places.initialize(context, apiKey)
@@ -61,6 +76,23 @@ class CreateAccountFragment : Fragment(), View.OnClickListener {
             startActivity(intent)
         }
 */
+
+        if(!Places.isInitialized()) {
+            Places.initialize(context, apiKey)
+        }
+        mPlacesClient = Places.createClient(context)
+
+        placeAdapter = PlaceArrayAdapter(binding.root.context, R.layout.layout_item_places, mPlacesClient)
+        binding.txtBirthPlace.setAdapter(placeAdapter)
+        binding.txtBirthPlace.onItemClickListener = AdapterView.OnItemClickListener { parent, _, position, _ ->
+            val place = parent.getItemAtPosition(position) as PlaceDataModel
+            binding.txtBirthPlace.apply {
+                setText(place.fullText)
+                setSelection(binding.txtBirthPlace.length())
+            }
+        }
+        binding.txtBirthPlace.threshold = 3
+
         val mobileNo = arguments?.getString(MOBILE_NO)
         isRegister = arguments?.getBoolean(IS_REGISTER)
 
@@ -80,12 +112,14 @@ class CreateAccountFragment : Fragment(), View.OnClickListener {
             val validationResult = validateUserInput()
             if (validationResult.first) {
                 val userRequest = getCreateAccountRequest()
-                createAccountViewModel.createAccount(userRequest)
                 bindObservers()
+                createAccountViewModel.createAccount(userRequest)
             } else {
                 showValidationErrors(validationResult.second)
             }
         }
+
+
     }
 
     private fun selectDOBPicker() {
@@ -153,12 +187,13 @@ class CreateAccountFragment : Fragment(), View.OnClickListener {
 
     private fun bindObservers() {
         createAccountViewModel.userResponseLiveData.observe(viewLifecycleOwner, Observer {
-            binding.progressBar.isVisible = true
+           // binding.progressBar.isVisible = true
+            dialog.show()
             when (it) {
                 is NetworkResult.Success -> {
                     // tokenManager.saveToken(it.data!!.token)
-                    binding.progressBar.isVisible = false
-
+                   // binding.progressBar.isVisible = false
+                    dialog.dismiss()
                     val bundle = Bundle()
                     bundle.putString(MOBILE_NO, enteredMobileNo)
                     bundle.putBoolean(IS_ACCOUNT_CREATED, true)
@@ -168,11 +203,13 @@ class CreateAccountFragment : Fragment(), View.OnClickListener {
                     )
                 }
                 is NetworkResult.Error -> {
-                    binding.progressBar.isVisible = false
+                   // binding.progressBar.isVisible = false
+                    dialog.dismiss()
                     showValidationErrors(it.message.toString())
                 }
                 is NetworkResult.Loading -> {
-                    binding.progressBar.isVisible = true
+                   // binding.progressBar.isVisible = true
+                    dialog.show()
                 }
             }
         })

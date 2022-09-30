@@ -66,4 +66,6 @@
     <dimen name="activity_margin_40dp">40dp</dimen>
     <dimen name="text_size_22sp">22sp</dimen>
     <dimen name="text_size_10sp">10sp</dimen>
+    <dimen name="lay_width_40dp">40dp</dimen>
+    <dimen name="padding_8">8dp</dimen>
 </resources>

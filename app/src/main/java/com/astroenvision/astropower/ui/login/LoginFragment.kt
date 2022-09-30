@@ -1,24 +1,22 @@
 package com.astroenvision.astropower.ui.login
 
+import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
+import android.widget.ProgressBar
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.astroenvision.astropower.R
-import com.astroenvision.astropower.common.Constants.IS_REGISTER
 import com.astroenvision.astropower.common.Constants.MOBILE_NO
-import com.astroenvision.astropower.common.LoadingDialog
 import com.astroenvision.astropower.common.NetworkResult
 import com.astroenvision.astropower.common.Utility
 import com.astroenvision.astropower.common.Utility.Companion.showSnackBar
 import com.astroenvision.astropower.databinding.FragmentLoginBinding
 import com.astroenvision.astropower.models.UserRequest
-import com.astroenvision.astropower.models.UserResponse
 import com.cheezycode.notesample.utils.TokenManager
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -30,13 +28,14 @@ class LoginFragment : Fragment() {
     private val binding get() = _binding!!
     private val userViewModel by activityViewModels<UserViewModel>()
     private lateinit var mobileNo: String
+    private lateinit var dialog: Dialog
 
     @Inject
     lateinit var tokenManager: TokenManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
 
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
@@ -46,19 +45,21 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        dialog = Utility.progressDialog(binding.root.context)
         binding.txtContinueProceed.setOnClickListener {
             Utility.hideKeyboard(it)
             mobileNo = binding.txtMobile.text.toString()
             val validationResult = userViewModel.validateLogin(mobileNo)
             if (validationResult.first) {
                 val userRequest = getUserRequest()
-                userViewModel.userLogin(userRequest)
                 bindObservers()
+                userViewModel.userLogin(userRequest)
             } else {
                 showValidationErrors(validationResult.second)
             }
         }
+
+
     }
 
     private fun getUserRequest(): UserRequest {
@@ -75,11 +76,13 @@ class LoginFragment : Fragment() {
         userViewModel.userResponseLiveData.observe(viewLifecycleOwner, Observer {
             /* val loading = LoadingDialog(requireActivity())
              loading.startLoading()*/
-            binding.progressBar.isVisible = true
+            dialog.show()
             when (it) {
                 is NetworkResult.Success -> {
                     // loading.isDismiss()
-                    binding.progressBar.isVisible = false
+
+                    dialog.dismiss()
+
                     //  tokenManager.saveToken(it.data!!.token)
                     val bundle = Bundle()
                     if (it.data != null) {
@@ -101,11 +104,16 @@ class LoginFragment : Fragment() {
                 }
                 is NetworkResult.Error -> {
                     //  loading.isDismiss()
-                    binding.progressBar.isVisible = false
+
+
+                    dialog.dismiss()
+
                     showSnackBar(binding.root, it.message.toString())
                 }
                 is NetworkResult.Loading -> {
-                    binding.progressBar.isVisible = true
+                    if (!dialog.isShowing) {
+                        dialog.show()
+                    }
                     //loading.startLoading()
                 }
             }
